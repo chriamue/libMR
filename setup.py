@@ -1,11 +1,11 @@
 from setuptools import setup
 from setuptools.extension import Extension
-import numpy
 
 try:
+    import numpy
     from Cython.Build import cythonize
 except ImportError:
-    raise ImportError("You must have Cython >=0.17 to build LibMR's python bindings!")
+    raise ImportError("You must have Cython >=0.17 and numpy to build LibMR's python bindings!")
 
 setup(name='libmr',
       ext_modules = __import__("Cython").Build.cythonize(Extension('libmr',[
@@ -23,5 +23,6 @@ setup(name='libmr',
       url="https://github.com/Vastlab/libMR",
       license="http://www.metarecognition.com/libmr-license/",
       author='Terry Boult, Ethan Rudd, and Manuel Gunther',
-      install_requires=['cython','numpy']
+      setup_requires=['Cython','numpy'],
+      install_requires=['Cython','numpy']
 )
